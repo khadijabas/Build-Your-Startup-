@@ -8,15 +8,24 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #0202B0, #121212);
+      background: linear-gradient(-45deg, #0202B0, #121212, #0202B0, #121212);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
       color: #fff;
       text-align: center;
     }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
     header {
       padding: 40px 20px 10px;
     }
     h1 {
-      font-size: 2.5em;
+      font-size: 3em;
       color: #F3B83B;
       animation: popIn 1s ease;
     }
@@ -52,9 +61,12 @@
       margin-top: 40px;
       font-size: 0.9em;
       color: #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
     }
     .logo {
-      margin-top: 10px;
       width: 100px;
     }
     .drop-item {
@@ -75,13 +87,46 @@
     }
     #team-name {
       margin-top: 10px;
-      font-size: 1.2em;
+      font-size: 1.5em;
       font-weight: bold;
-      color: #fff;
+      color: #000;
+      background: #F3B83B;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-block;
     }
     #startScreen {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       padding: 50px;
+    }
+    #teamInput {
+      padding: 10px;
+      font-size: 1.5em;
+      width: 300px;
+      border: none;
+      border-radius: 8px;
+      text-align: center;
+    }
+    #startButton {
+      margin-top: 20px;
+      padding: 14px 28px;
+      font-size: 1.4em;
+      font-weight: bold;
+      background-color: #F3B83B;
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    #startButton:hover {
+      background-color: #e0a800;
+      transform: scale(1.05);
     }
     #mainContent {
       display: none;
@@ -93,8 +138,11 @@
     <h1>Let’s cook up your business!</h1>
     <p>Enter your team name:</p>
     <input type="text" id="teamInput" placeholder="Team Name">
-    <br><br>
-    <button onclick="startCooking()">Start Cooking 🍕</button>
+    <button id="startButton" onclick="startCooking()">Start Cooking Your Business 🍕</button>
+    <footer>
+      <span>Created by Khadija Basahel</span>
+      <img src="Logo colors-01.png" alt="Beyond Logo" class="logo">
+    </footer>
   </div>
 
   <div id="mainContent">
@@ -121,14 +169,15 @@
     <div class="message" id="finishMessage">🎉 Your Startup is Ready! 🎉</div>
 
     <footer>
-      Created by Khadija Basahel | <img src="Logo colors-01.png" alt="Beyond Logo" class="logo">
+      <span>Created by Khadija Basahel</span>
+      <img src="Logo colors-01.png" alt="Beyond Logo" class="logo">
     </footer>
   </div>
 
   <script>
     function startCooking() {
       const name = document.getElementById('teamInput').value;
-      document.getElementById('team-name').textContent = name ? `Team: ${name}` : '';
+      document.getElementById('team-name').textContent = name ? name : '';
       document.getElementById('startScreen').style.display = 'none';
       document.getElementById('mainContent').style.display = 'block';
     }
