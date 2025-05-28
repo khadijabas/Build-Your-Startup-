@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pizza Canvas Activity</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      padding: 40px 20px 20px;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #f3b83b;
+    }
+    p.intro {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.2em;
+    }
+    .pizza-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px 20px;
+    }
+    .pizza-part {
+      cursor: pointer;
+      width: 120px;
+      transition: transform 0.3s ease;
+    }
+    .pizza-part:hover {
+      transform: scale(1.1);
+    }
+    .label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .tooltip {
+      display: none;
+      background: #fff4d6;
+      color: #000;
+      padding: 15px;
+      border-radius: 8px;
+      max-width: 300px;
+      margin: 0 auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .tooltip.show {
+      display: block;
+    }
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 12px;
+      animation: fall 3s infinite;
+      z-index: 999;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🍕 Pizza Canvas Activity</h1>
+    <p class="intro">
+      Let’s explore how each layer of a pizza can represent a vital part of your startup. Click on each layer to learn more!
+    </p>
+  </header>
+
+  <div class="pizza-container">
+    <div class="pizza-part" onclick="showTip('crust')">
+      <img src="crust.png" alt="Crust" width="100">
+      <div class="label">Mission</div>
+    </div>
+    <div class="pizza-part" onclick="showTip('sauce')">
+      <img src="sauce.png" alt="Sauce" width="100">
+      <div class="label">Values</div>
+    </div>
+    <div class="pizza-part" onclick="showTip('cheese')">
+      <img src="cheese.png" alt="Cheese" width="100">
+      <div class="label">Culture</div>
+    </div>
+    <div class="pizza-part" onclick="showTip('toppings')">
+      <img src="toppings.png" alt="Toppings" width="100">
+      <div class="label">Services</div>
+    </div>
+    <div class="pizza-part" onclick="showTip('edge')">
+      <img src="edge.png" alt="Crust Edge" width="100">
+      <div class="label">Boundaries</div>
+    </div>
+  </div>
+
+  <div id="crust" class="tooltip">The base layer that holds everything together. What is the core purpose of your business?</div>
+  <div id="sauce" class="tooltip">Your guiding flavor. What values guide your decisions and behavior?</div>
+  <div id="cheese" class="tooltip">The internal vibe and glue of your team. What is your company culture?</div>
+  <div id="toppings" class="tooltip">What makes your startup unique. What products or services do you offer?</div>
+  <div id="edge" class="tooltip">The limits of what you won’t do. What boundaries won’t your business cross?</div>
+
+  <audio id="click-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_1f10d66f8f.mp3"></audio>
+
+  <script>
+    let clicked = 0;
+    const total = 5;
+
+    function showTip(id) {
+      document.getElementById('click-sound').play();
+      document.querySelectorAll('.tooltip').forEach(el => el.classList.remove('show'));
+      const el = document.getElementById(id);
+      el.classList.add('show');
+      clicked++;
+      if (clicked === total) launchConfetti();
+    }
+
+    function launchConfetti() {
+      for (let i = 0; i < 50; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.backgroundColor = ["#f3b83b", "#ff4c4c", "#4c9eff", "#008CBA"][(i % 4)];
+        c.style.animationDuration = (Math.random() * 2 + 2) + "s";
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4000);
+      }
+    }
+  </script>
+</body>
+</html>
