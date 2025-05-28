@@ -1,137 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Pizza Canvas Activity</title>
+  <meta charset="UTF-8">
+  <title>Pizza Canvas Builder</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #f9f9f9;
-      color: #333;
+      background: linear-gradient(to bottom right, #0202B0, #121212);
+      color: #fff;
       text-align: center;
     }
     header {
-      padding: 40px 20px 20px;
+      padding: 40px 20px 10px;
     }
     h1 {
       font-size: 2.5em;
-      color: #f3b83b;
+      color: #F3B83B;
+      animation: popIn 1s ease;
     }
-    p.intro {
-      max-width: 700px;
-      margin: 0 auto;
-      font-size: 1.2em;
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
-    .pizza-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      padding: 40px 20px;
+    .pizza-area {
+      margin: 20px auto;
+      max-width: 600px;
+      position: relative;
     }
-    .pizza-part {
-      cursor: pointer;
-      width: 120px;
-      transition: transform 0.3s ease;
+    #pizza-base {
+      width: 300px;
     }
-    .pizza-part:hover {
-      transform: scale(1.1);
+    .topping {
+      width: 60px;
+      position: relative;
+      cursor: grab;
     }
-    .label {
-      font-weight: bold;
-      margin-top: 10px;
+    .topping.dragged {
+      opacity: 0.7;
     }
-    .tooltip {
+    .controls {
+      margin: 20px;
+    }
+    .message {
+      font-size: 1.5em;
+      margin-top: 20px;
       display: none;
-      background: #fff4d6;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+    .logo {
+      margin-top: 10px;
+      width: 100px;
+    }
+    .drop-item {
+      position: absolute;
+      text-align: center;
+    }
+    .drop-item img {
+      width: 60px;
+    }
+    .drop-item p {
+      margin: 5px 0 0;
+      font-size: 0.7em;
       color: #000;
-      padding: 15px;
-      border-radius: 8px;
-      max-width: 300px;
-      margin: 0 auto;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      background: #fff;
+      border-radius: 5px;
+      padding: 2px 6px;
+      display: inline-block;
     }
-    .tooltip.show {
+    #team-name {
+      margin-top: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #fff;
+    }
+    #startScreen {
       display: block;
+      padding: 50px;
     }
-    .confetti {
-      position: fixed;
-      top: -10px;
-      width: 8px;
-      height: 12px;
-      animation: fall 3s infinite;
-      z-index: 999;
-    }
-    @keyframes fall {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(100vh); }
+    #mainContent {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🍕 Pizza Canvas Activity</h1>
-    <p class="intro">
-      Let’s explore how each layer of a pizza can represent a vital part of your startup. Click on each layer to learn more!
-    </p>
-  </header>
-
-  <div class="pizza-container">
-    <div class="pizza-part" onclick="showTip('crust')">
-      <img src="crust.png" alt="Crust" width="100">
-      <div class="label">Mission</div>
-    </div>
-    <div class="pizza-part" onclick="showTip('sauce')">
-      <img src="sauce.png" alt="Sauce" width="100">
-      <div class="label">Values</div>
-    </div>
-    <div class="pizza-part" onclick="showTip('cheese')">
-      <img src="cheese.png" alt="Cheese" width="100">
-      <div class="label">Culture</div>
-    </div>
-    <div class="pizza-part" onclick="showTip('toppings')">
-      <img src="toppings.png" alt="Toppings" width="100">
-      <div class="label">Services</div>
-    </div>
-    <div class="pizza-part" onclick="showTip('edge')">
-      <img src="edge.png" alt="Crust Edge" width="100">
-      <div class="label">Boundaries</div>
-    </div>
+  <div id="startScreen">
+    <h1>Let’s cook up your business!</h1>
+    <p>Enter your team name:</p>
+    <input type="text" id="teamInput" placeholder="Team Name">
+    <br><br>
+    <button onclick="startCooking()">Start Cooking 🍕</button>
   </div>
 
-  <div id="crust" class="tooltip">The base layer that holds everything together. What is the core purpose of your business?</div>
-  <div id="sauce" class="tooltip">Your guiding flavor. What values guide your decisions and behavior?</div>
-  <div id="cheese" class="tooltip">The internal vibe and glue of your team. What is your company culture?</div>
-  <div id="toppings" class="tooltip">What makes your startup unique. What products or services do you offer?</div>
-  <div id="edge" class="tooltip">The limits of what you won’t do. What boundaries won’t your business cross?</div>
+  <div id="mainContent">
+    <header>
+      <div id="team-name"></div>
+      <audio autoplay loop>
+        <source src="https://cdn.pixabay.com/audio/2023/03/13/audio_99b2cbfa74.mp3" type="audio/mp3">
+      </audio>
+    </header>
 
-  <audio id="click-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_1f10d66f8f.mp3"></audio>
+    <div class="pizza-area" id="pizzaArea">
+      <img src="Crust.png" id="pizza-base" alt="Pizza Base">
+    </div>
+
+    <div class="controls">
+      <p>Drag each item onto the pizza to learn about your startup:</p>
+      <img src="Crust.png" class="topping" draggable="true" data-info="Mission: This is the foundation of your business." alt="Crust">
+      <img src="Sauce.png" class="topping" draggable="true" data-info="Values: What beliefs shape your work?" alt="Sauce">
+      <img src="Cheese.png" class="topping" draggable="true" data-info="Culture: The internal vibe of your team." alt="Cheese">
+      <img src="Toppings.png" class="topping" draggable="true" data-info="Services: Your unique offerings." alt="Toppings">
+      <img src="Crust Edge.png" class="topping" draggable="true" data-info="Boundaries: What won’t your business support?" alt="Edge">
+    </div>
+
+    <div class="message" id="finishMessage">🎉 Your Startup is Ready! 🎉</div>
+
+    <footer>
+      Created by Khadija Basahel | <img src="Logo colors-01.png" alt="Beyond Logo" class="logo">
+    </footer>
+  </div>
 
   <script>
-    let clicked = 0;
-    const total = 5;
-
-    function showTip(id) {
-      document.getElementById('click-sound').play();
-      document.querySelectorAll('.tooltip').forEach(el => el.classList.remove('show'));
-      const el = document.getElementById(id);
-      el.classList.add('show');
-      clicked++;
-      if (clicked === total) launchConfetti();
+    function startCooking() {
+      const name = document.getElementById('teamInput').value;
+      document.getElementById('team-name').textContent = name ? `Team: ${name}` : '';
+      document.getElementById('startScreen').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
     }
 
-    function launchConfetti() {
-      for (let i = 0; i < 50; i++) {
-        const c = document.createElement("div");
-        c.className = "confetti";
-        c.style.left = Math.random() * 100 + "vw";
-        c.style.backgroundColor = ["#f3b83b", "#ff4c4c", "#4c9eff", "#008CBA"][(i % 4)];
-        c.style.animationDuration = (Math.random() * 2 + 2) + "s";
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 4000);
-      }
+    const toppings = document.querySelectorAll('.topping');
+    const pizzaArea = document.getElementById('pizzaArea');
+    let placed = 0;
+
+    toppings.forEach(topping => {
+      topping.addEventListener('dragstart', dragStart);
+      topping.addEventListener('dragend', dragEnd);
+    });
+
+    pizzaArea.addEventListener('dragover', e => e.preventDefault());
+    pizzaArea.addEventListener('drop', dropHandler);
+
+    function dragStart(e) {
+      this.classList.add('dragged');
+      e.dataTransfer.setData('imgSrc', e.target.src);
+      e.dataTransfer.setData('text', e.target.dataset.info);
+    }
+
+    function dragEnd() {
+      this.classList.remove('dragged');
+    }
+
+    function dropHandler(e) {
+      e.preventDefault();
+      const info = e.dataTransfer.getData('text');
+      const imgSrc = e.dataTransfer.getData('imgSrc');
+      const newDrop = document.createElement('div');
+      newDrop.className = 'drop-item';
+      newDrop.style.top = `${Math.random() * 200 + 50}px`;
+      newDrop.style.left = `${Math.random() * 200 + 100}px`;
+      newDrop.innerHTML = `<img src="${imgSrc}"><p>${info}</p>`;
+      pizzaArea.appendChild(newDrop);
+      placed++;
+      if (placed >= 5) showFinish();
+    }
+
+    function showFinish() {
+      const msg = document.getElementById('finishMessage');
+      msg.style.display = 'block';
+      document.getElementById('pizza-base').style.transition = 'transform 1s';
+      document.getElementById('pizza-base').style.transform = 'rotate(360deg)';
     }
   </script>
 </body>
