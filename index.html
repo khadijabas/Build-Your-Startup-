@@ -33,30 +33,68 @@
       from { transform: scale(0); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
-    .pizza-area {
-      margin: 20px auto;
+
+    #team-name {
+      margin-top: 10px;
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #000;
+      background: #F3B83B;
+      padding: 12px 25px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+
+    .question-box {
+      margin: 30px auto;
       max-width: 600px;
-      position: relative;
+      background: #ffffff10;
+      border: 1px solid #fff;
+      padding: 20px;
+      border-radius: 15px;
     }
-    #pizza-base {
-      width: 300px;
+    .question-box h2 {
+      color: #F3B83B;
     }
-    .topping {
-      width: 60px;
-      position: relative;
-      cursor: grab;
+    .pizza-img {
+      max-width: 100px;
+      display: block;
+      margin: 10px auto;
     }
-    .topping.dragged {
-      opacity: 0.7;
+    .question-box textarea {
+      width: 90%;
+      height: 80px;
+      border-radius: 10px;
+      border: none;
+      padding: 10px;
+      font-size: 1em;
+      resize: none;
     }
-    .controls {
-      margin: 20px;
+    .question-box button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #F3B83B;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-right: 10px;
     }
-    .message {
-      font-size: 1.5em;
-      margin-top: 20px;
+    .answer-output {
+      margin-top: 10px;
+      background: #fff;
+      color: #000;
+      padding: 10px;
+      border-radius: 8px;
       display: none;
     }
+    .edit-box {
+      display: none;
+      margin-top: 10px;
+    }
+
     footer {
       margin-top: 40px;
       font-size: 0.9em;
@@ -69,32 +107,7 @@
     .logo {
       width: 100px;
     }
-    .drop-item {
-      position: absolute;
-      text-align: center;
-    }
-    .drop-item img {
-      width: 60px;
-    }
-    .drop-item p {
-      margin: 5px 0 0;
-      font-size: 0.7em;
-      color: #000;
-      background: #fff;
-      border-radius: 5px;
-      padding: 2px 6px;
-      display: inline-block;
-    }
-    #team-name {
-      margin-top: 10px;
-      font-size: 1.5em;
-      font-weight: bold;
-      color: #000;
-      background: #F3B83B;
-      padding: 10px 20px;
-      border-radius: 10px;
-      display: inline-block;
-    }
+
     #startScreen {
       display: flex;
       flex-direction: column;
@@ -153,20 +166,75 @@
       </audio>
     </header>
 
-    <div class="pizza-area" id="pizzaArea">
-      <img src="Crust.png" id="pizza-base" alt="Pizza Base">
+    <div class="question-box">
+      <img src="Crust.png" alt="Crust Image" class="pizza-img">
+      <h2>🍞 Crust (Mission)</h2>
+      <p>What is the core purpose of your business?</p>
+      <textarea id="missionInput"></textarea><br>
+      <div id="missionControls">
+        <button onclick="toggleAnswer('missionInput', 'missionAnswer', 'editMission', 'missionControls')">Done</button>
+      </div>
+      <div class="answer-output" id="missionAnswer"></div>
+      <div class="edit-box" id="editMission">
+        <button onclick="toggleAnswer('missionInput', 'missionAnswer', 'editMission', 'missionControls')">Edit</button>
+      </div>
     </div>
 
-    <div class="controls">
-      <p>Drag each item onto the pizza to learn about your startup:</p>
-      <img src="Crust.png" class="topping" draggable="true" data-info="Mission: This is the foundation of your business." alt="Crust">
-      <img src="Sauce.png" class="topping" draggable="true" data-info="Values: What beliefs shape your work?" alt="Sauce">
-      <img src="Cheese.png" class="topping" draggable="true" data-info="Culture: The internal vibe of your team." alt="Cheese">
-      <img src="Toppings.png" class="topping" draggable="true" data-info="Services: Your unique offerings." alt="Toppings">
-      <img src="Crust Edge.png" class="topping" draggable="true" data-info="Boundaries: What won’t your business support?" alt="Edge">
+    <div class="question-box">
+      <img src="Sauce.png" alt="Sauce Image" class="pizza-img">
+      <h2>🍅 Sauce (Values)</h2>
+      <p>What values guide your decisions and behavior?</p>
+      <textarea id="valuesInput"></textarea><br>
+      <div id="valuesControls">
+        <button onclick="toggleAnswer('valuesInput', 'valuesAnswer', 'editValues', 'valuesControls')">Done</button>
+      </div>
+      <div class="answer-output" id="valuesAnswer"></div>
+      <div class="edit-box" id="editValues">
+        <button onclick="toggleAnswer('valuesInput', 'valuesAnswer', 'editValues', 'valuesControls')">Edit</button>
+      </div>
     </div>
 
-    <div class="message" id="finishMessage">🎉 Your Startup is Ready! 🎉</div>
+    <div class="question-box">
+      <img src="Cheese.png" alt="Cheese Image" class="pizza-img">
+      <h2>🧀 Cheese (Culture)</h2>
+      <p>What is the internal vibe and culture of your team?</p>
+      <textarea id="cultureInput"></textarea><br>
+      <div id="cultureControls">
+        <button onclick="toggleAnswer('cultureInput', 'cultureAnswer', 'editCulture', 'cultureControls')">Done</button>
+      </div>
+      <div class="answer-output" id="cultureAnswer"></div>
+      <div class="edit-box" id="editCulture">
+        <button onclick="toggleAnswer('cultureInput', 'cultureAnswer', 'editCulture', 'cultureControls')">Edit</button>
+      </div>
+    </div>
+
+    <div class="question-box">
+      <img src="Toppings.png" alt="Toppings Image" class="pizza-img">
+      <h2>🍄 Toppings (Products/Services)</h2>
+      <p>What unique offerings or services do you provide?</p>
+      <textarea id="servicesInput"></textarea><br>
+      <div id="servicesControls">
+        <button onclick="toggleAnswer('servicesInput', 'servicesAnswer', 'editServices', 'servicesControls')">Done</button>
+      </div>
+      <div class="answer-output" id="servicesAnswer"></div>
+      <div class="edit-box" id="editServices">
+        <button onclick="toggleAnswer('servicesInput', 'servicesAnswer', 'editServices', 'servicesControls')">Edit</button>
+      </div>
+    </div>
+
+    <div class="question-box">
+      <img src="Crust Edge.png" alt="Crust Edge Image" class="pizza-img">
+      <h2>🍕 Crust Edge (Boundaries)</h2>
+      <p>What won't your business do or support?</p>
+      <textarea id="edgeInput"></textarea><br>
+      <div id="edgeControls">
+        <button onclick="toggleAnswer('edgeInput', 'edgeAnswer', 'editEdge', 'edgeControls')">Done</button>
+      </div>
+      <div class="answer-output" id="edgeAnswer"></div>
+      <div class="edit-box" id="editEdge">
+        <button onclick="toggleAnswer('edgeInput', 'edgeAnswer', 'editEdge', 'edgeControls')">Edit</button>
+      </div>
+    </div>
 
     <footer>
       <span>Created by Khadija Basahel</span>
@@ -182,47 +250,24 @@
       document.getElementById('mainContent').style.display = 'block';
     }
 
-    const toppings = document.querySelectorAll('.topping');
-    const pizzaArea = document.getElementById('pizzaArea');
-    let placed = 0;
+    function toggleAnswer(inputId, outputId, editId, controlBoxId) {
+      const input = document.getElementById(inputId);
+      const output = document.getElementById(outputId);
+      const editButton = document.getElementById(editId);
+      const controlBox = document.getElementById(controlBoxId);
 
-    toppings.forEach(topping => {
-      topping.addEventListener('dragstart', dragStart);
-      topping.addEventListener('dragend', dragEnd);
-    });
-
-    pizzaArea.addEventListener('dragover', e => e.preventDefault());
-    pizzaArea.addEventListener('drop', dropHandler);
-
-    function dragStart(e) {
-      this.classList.add('dragged');
-      e.dataTransfer.setData('imgSrc', e.target.src);
-      e.dataTransfer.setData('text', e.target.dataset.info);
-    }
-
-    function dragEnd() {
-      this.classList.remove('dragged');
-    }
-
-    function dropHandler(e) {
-      e.preventDefault();
-      const info = e.dataTransfer.getData('text');
-      const imgSrc = e.dataTransfer.getData('imgSrc');
-      const newDrop = document.createElement('div');
-      newDrop.className = 'drop-item';
-      newDrop.style.top = `${Math.random() * 200 + 50}px`;
-      newDrop.style.left = `${Math.random() * 200 + 100}px`;
-      newDrop.innerHTML = `<img src="${imgSrc}"><p>${info}</p>`;
-      pizzaArea.appendChild(newDrop);
-      placed++;
-      if (placed >= 5) showFinish();
-    }
-
-    function showFinish() {
-      const msg = document.getElementById('finishMessage');
-      msg.style.display = 'block';
-      document.getElementById('pizza-base').style.transition = 'transform 1s';
-      document.getElementById('pizza-base').style.transform = 'rotate(360deg)';
+      if (input.style.display === 'none') {
+        input.style.display = 'block';
+        output.style.display = 'none';
+        editButton.style.display = 'none';
+        controlBox.style.display = 'block';
+      } else {
+        output.innerText = input.value;
+        input.style.display = 'none';
+        output.style.display = 'block';
+        editButton.style.display = 'block';
+        controlBox.style.display = 'none';
+      }
     }
   </script>
 </body>
