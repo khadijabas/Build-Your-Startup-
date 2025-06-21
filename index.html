@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pizza Canvas Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your Startup Like a Pizza</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
+      padding: 40px 20px;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(-45deg, #0202B0, #121212, #0202B0, #121212);
       background-size: 400% 400%;
@@ -21,86 +22,14 @@
       100% {background-position: 0% 50%;}
     }
 
-    header {
-      padding: 40px 20px 10px;
-    }
     h1 {
-      font-size: 3em;
-      color: #F3B83B;
-      animation: popIn 1s ease;
-    }
-    @keyframes popIn {
-      from { transform: scale(0); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    #team-name {
-      margin-top: 10px;
-      font-size: 1.8em;
-      font-weight: bold;
-      color: #000;
-      background: #F3B83B;
-      padding: 12px 25px;
-      border-radius: 12px;
-      display: inline-block;
-    }
-
-    .pizza-intro, .pizza-question {
-      margin: 40px auto 20px;
-      max-width: 800px;
-      background: #ffffff10;
-      border: 1px solid #fff;
-      border-radius: 15px;
-      padding: 30px;
-    }
-
-    .pizza-intro h2, .pizza-question h2 {
-      color: #F3B83B;
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-    .pizza-intro p, .pizza-question p {
-      font-size: 1.2em;
-      margin-bottom: 10px;
-    }
-
-    .pizza-intro p span, .pizza-question p span {
-      font-weight: bold;
-      color: #F3B83B;
-    }
-
-    .layers-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-    .layer-item {
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .layer-item:hover {
-      transform: scale(1.1);
-    }
-    .layer-detail {
-      display: block;
-      text-align: left;
-      margin: 20px auto;
-      background: #00000040;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 600px;
-    }
-    .layer-detail img {
-      display: block;
-      margin: 0 auto 10px;
-      width: 220px;
+      color: white;
+      font-size: 2.5em;
+      margin-bottom: 30px;
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 0.9em;
+      margin-top: 60px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -118,176 +47,25 @@
       width: 1px;
       background-color: white;
     }
-
     .logo {
       width: 100px;
-    }
-
-    #startScreen, #introScreen {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      padding: 50px;
-    }
-    #teamInput {
-      padding: 10px;
-      font-size: 1.5em;
-      width: 300px;
-      border: none;
-      border-radius: 8px;
-      text-align: center;
-    }
-    #startButton, .goToIntro, .goToMain, .goBackBtn {
-      margin-top: 20px;
-      padding: 14px 28px;
-      font-size: 1.4em;
-      font-weight: bold;
-      background-color: #F3B83B;
-      border: none;
-      border-radius: 10px;
-      color: #000;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    #startButton:hover, .goToIntro:hover, .goToMain:hover, .goBackBtn:hover {
-      background-color: #e0a800;
-      transform: scale(1.05);
-    }
-    #mainContent, #introScreen {
-      display: none;
-    }
-
-    textarea {
-      width: 80%;
-      height: 120px;
-      font-size: 1.1em;
-      border-radius: 10px;
-      padding: 10px;
-    }
-
-    .note-text {
-      font-size: 0.8em;
-      color: #F3B83B;
-      margin: 10px 0 0;
     }
   </style>
 </head>
 <body>
-  <div id="startScreen">
-    <h1>Let’s cook up your business!</h1>
-    <p>Enter your team name:</p>
-    <input type="text" id="teamInput" placeholder="Team Name">
-    <button id="startButton" onclick="goToIntro()">Start Cooking Your Business 🍕</button>
-    <footer>
-      <span class="footer-created">Created by</span>
-      <span class="footer-name">Khadija Basahel</span>
-      <div class="footer-divider"></div>
-      <img src="Logo colors-01.png" alt="Beyond Logo" class="logo">
-    </footer>
+  <h1>Build Your Startup Like a Pizza</h1>
+
+  <div style="margin-top: 40px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+    <a href="https://khadijabas.github.io/Group-Categories/" target="_blank" style="text-decoration: none; background-color: #F3B83B; padding: 12px 20px; border-radius: 10px; color: black; font-weight: bold;">What If Challenge</a>
+    <a href="https://khadijabas.github.io/workshop-P-/" target="_blank" style="text-decoration: none; background-color: #F3B83B; padding: 12px 20px; border-radius: 10px; color: black; font-weight: bold;">Build Your Business</a>
+    <a href="https://khadijabas.github.io/timer-/" target="_blank" style="text-decoration: none; background-color: #F3B83B; padding: 12px 20px; border-radius: 10px; color: black; font-weight: bold;">The Timer</a>
   </div>
 
-  <div id="introScreen">
-    <div class="pizza-intro">
-      <h2>Build Your Business, One Layer at a Time</h2>
-      <div id="layerDisplay"></div>
-      <div class="layers-container">
-        <img src="Crust.png" class="layer-item" onclick="showLayer('crust')" width="80">
-        <img src="Sauce.png" class="layer-item" onclick="showLayer('sauce')" width="80">
-        <img src="Cheese.png" class="layer-item" onclick="showLayer('cheese')" width="80">
-        <img src="Toppings.png" class="layer-item" onclick="showLayer('toppings')" width="80">
-        <img src="Crust Edge.png" class="layer-item" onclick="showLayer('edge')" width="80">
-      </div>
-      <p class="note-text">Click on any pizza layer to explore what it represents in a startup.</p>
-      <button class="goToMain" onclick="goToMainContent()">Go to Activity</button>
-    </div>
-    <footer>
-      <span class="footer-created">Created by</span>
-      <span class="footer-name">Khadija Basahel</span>
-      <div class="footer-divider"></div>
-      <img src="Logo colors-01.png" alt="Beyond Logo" class="logo">
-    </footer>
-  </div>
-
-  <div id="mainContent">
-    <header>
-      <div id="team-name"></div>
-      <audio autoplay loop>
-        <source src="https://cdn.pixabay.com/audio/2023/03/13/audio_99b2cbfa74.mp3" type="audio/mp3">
-      </audio>
-    </header>
-
-    <div class="pizza-question">
-      <img src="Crust.png" alt="Crust Image" width="80">
-      <h2> Crust (Mission)</h2>
-      <p>What is the core purpose of your business?</p>
-      <textarea></textarea>
-    </div>
-    <div class="pizza-question">
-      <img src="Sauce.png" alt="Sauce Image" width="80">
-      <h2> Sauce (Values)</h2>
-      <p>What values guide your decisions and behavior?</p>
-      <textarea></textarea>
-    </div>
-    <div class="pizza-question">
-      <img src="Cheese.png" alt="Cheese Image" width="80">
-      <h2> Cheese (Culture)</h2>
-      <p>What is the internal vibe and culture of your team?</p>
-      <textarea></textarea>
-    </div>
-    <div class="pizza-question">
-      <img src="Toppings.png" alt="Toppings Image" width="80">
-      <h2> Toppings (Products/Services)</h2>
-      <p>What unique offerings or services do you provide?</p>
-      <textarea></textarea>
-    </div>
-    <div class="pizza-question">
-      <img src="Crust Edge.png" alt="Edge Image" width="80">
-      <h2> Crust Edge (Boundaries)</h2>
-      <p>What won't your business do or support?</p>
-      <textarea></textarea>
-    </div>
-
-    <button class="goBackBtn" onclick="goToIntro()">⬅ Go Back</button>
-
-    <footer>
-      <span class="footer-created">Created by</span>
-      <span class="footer-name">Khadija Basahel</span>
-      <div class="footer-divider"></div>
-      <img src="Logo colors-01.png" alt="Beyond Logo" class="logo">
-    </footer>
-  </div>
-
-  <script>
-    function goToIntro() {
-      document.getElementById('startScreen').style.display = 'none';
-      document.getElementById('introScreen').style.display = 'flex';
-      document.getElementById('mainContent').style.display = 'none';
-    }
-    function goToMainContent() {
-      const name = document.getElementById('teamInput').value;
-      document.getElementById('team-name').textContent = name ? name : '';
-      document.getElementById('introScreen').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
-    }
-    function showLayer(layerId) {
-      const data = {
-        crust: ["Crust.png", "<span>Crust (Mission):</span> Just like the crust holds everything together, the mission defines the core purpose of the business why it exists."],
-        sauce: ["Sauce.png", "<span>Sauce (Values):</span> The sauce gives flavor. In a business, values shape how decisions are made and how the team behaves."],
-        cheese: ["Cheese.png", "<span>Cheese (Culture):</span> Cheese connects everything like company culture, which bonds the team and defines the day-to-day experience."],
-        toppings: ["Toppings.png", "<span>Toppings (Products/Services):</span> These are the visible, unique offerings that customers interact with they differentiate your business."],
-        edge: ["Crust Edge.png", "<span>Crust Edge (Boundaries):</span> The edge defines limits what the business won’t do, who it doesn’t serve, or what’s off-brand."]
-      };
-      const [imgSrc, textHTML] = data[layerId];
-      document.getElementById('layerDisplay').innerHTML = `
-        <div class="layer-detail">
-          <img src="${imgSrc}" alt="Layer Image">
-          <p>${textHTML}</p>
-        </div>
-      `;
-    }
-  </script>
+  <footer>
+    <span class="footer-created">Created by</span>
+    <span class="footer-name">Khadija Basahel</span>
+    <div class="footer-divider"></div>
+    <img src="Logo colors-01.png" alt="Beyond Logo" class="logo">
+  </footer>
 </body>
 </html>
